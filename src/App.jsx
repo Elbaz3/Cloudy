@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLocationDot, faMagnifyingGlass, faXmark, faCircleLeft, faCircleRight } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faMagnifyingGlass, faSnowflake, faXmark, faCircleLeft, faCircleRight } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios'
 import Card from './components/Card';
@@ -7,6 +7,12 @@ import humiditiImg from'./assets/humidity.png'
 import air from'./assets/air.png'
 import rainy from'./assets/rainy.png'
 import wind from'./assets/wind.png'
+import cloudy from './assets/cloudy2.jpg'
+import rainyw from './assets/rain2.jpg'
+import sunny from './assets/partly.jpg'
+import snow from './assets/snow2.jpg'
+import heavyrain from './assets/rain4.jpg'
+import clear from './assets/clear.jpg'
 
 
 const App = () => {
@@ -22,6 +28,14 @@ const App = () => {
   const slider = useRef(null)
   const [loading, setLoading] = useState(true)
   const [icon, setIcon] = useState('')
+  const [bgimage, setBgimage] = useState('')
+  const images = {
+    sunny: ['sunny'], 
+    cloudy: ['cloudy', 'cloudy2', 'cloudy3'], 
+    partly: ['partly', 'partly2'], 
+    rain: ['rain', 'rain2', 'rain3', 'rain4'],
+    snow: ['snow', 'snow2', 'snow3']
+  }
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -45,15 +59,14 @@ const App = () => {
       try {
         const response = await axios.get(`https://api.weatherapi.com/v1/forecast.json?key=133f4b3465c547279dd114732250103&q=${location}&days=7`)
         setData(response.data)
-        console.log(response.data)
         setSky(response.data.current.condition.text)
         setForecast(response.data.forecast.forecastday)
         setIcon(response.data.current.condition.icon)
-        setLoading(false)
+        setBgimage(response.data.current.condition.text)
       } catch (err) {
         setError(err.message)
+      } finally {
         setLoading(false)
-
       }
     }
     fetchData()
@@ -73,7 +86,7 @@ function handleSubmit (e) {
       setSky(response.data.current.condition.text)
       setForecast(response.data.forecast.forecastday)
       setIcon(response.data.current.condition.icon)
-
+      setBgimage(response.data.current.condition.text)
     } catch (err) {
       setError(err.messege)
     }
@@ -89,11 +102,32 @@ function handleRight() {
   slider.current.scrollBy({left: 150, behavior: 'smooth'})
 }
 
+useEffect(() => {
+  const current = bgimage || 'sunny'
+  if (current.toLowerCase() === 'sunny') {
+    document.body.style.backgroundImage = `url(${sunny})`
+  } else if (current.toLowerCase().trim() === 'heavy rain') {
+    document.body.style.backgroundImage = `url(${heavyrain})`
 
+  }else if (current.toLowerCase().trim() === 'partly cloudy'|| current.toLowerCase().trim() === 'cloudy') {
+    document.body.style.backgroundImage = `url(${cloudy})`
+
+  } else if (current.toLowerCase().trim() === 'blowing snow') {
+    document.body.style.backgroundImage = `url(${snow})`
+
+  }else if (current.toLowerCase().trim() === 'light rain') {
+    document.body.style.backgroundImage = `url(${rainyw})`
+
+  } else if (current.toLowerCase().trim() === 'clear'){
+    document.body.style.backgroundImage = `url(${clear})`
+
+  }
+}, [bgimage])
 
 
   return (
-    <main className='z-2 relative p-8 flex flex-col justify-between h-screen'>
+    <main className='z-2 relative p-8 flex flex-col justify-between h-screen   items-center'>
+      { !loading ? ( <>
         <form onSubmit={handleSubmit} ref={search} className='absolute border-2 p-2 border-gray-600 translate-y-[-100px]
         w-1/2 h-10 left-1/4  ease-in-out duration-800 rounded-xl flex shadow-gray-800 shadow-2xl'>
           <FontAwesomeIcon onClick={handleSearchBar} className='absolute top-[-20px] right-1/2 cursor-pointer' icon={faXmark} />
@@ -106,8 +140,8 @@ function handleRight() {
           />
           <button className='absolute right-3 top-1' type='submit'><FontAwesomeIcon className='cursor-pointer' icon={faMagnifyingGlass} /></button>
         </form>
-      <section className="top  flex justify-between max-sm:mt-10">
-        <div className="deg flex flex-col gap-5 p-2 rounded-2xl bg-gray-500/30 h-fit">
+      <section className="top  flex justify-between max-sm:mt-10 w-full ">
+        <div className="deg flex flex-col gap-5 p-2 rounded-2xl h-fit bg-black/40 backdrop-blur-lg">
         { loading ? <p>loading ...</p> 
         : 
           <>
@@ -121,7 +155,7 @@ function handleRight() {
           </> 
           }
         </div>
-        <div className='info flex flex-col gap-5 p-3 rounded-2xl bg-gray-500/30 text-[13px] text-gray-300'>
+        <div className='info flex flex-col gap-5 p-3 rounded-2xl bg-black/40 backdrop-blur-lg text-[13px] text-gray-300'>
           <div className='box flex gap-1'>
             <img className='text-white' style={{width: '25px', height: '25px'}} src={humiditiImg} alt="humidity" />
             <div className='humidity'>
@@ -153,12 +187,12 @@ function handleRight() {
 
         </div>
       </section>
-      <section className="slider z-1 text-white pb-5  flex flex-col">
+      <section className="slider z-1 text-white pb-5  flex flex-col w-full">
         <div  className="flex gap-3 pb-2">
           <FontAwesomeIcon className='cursor-pointer' onClick={handleLeft} icon={faCircleLeft} />
           <FontAwesomeIcon className='cursor-pointer' onClick={handleRight} icon={faCircleRight} />
         </div>
-        <div ref={slider} className="slider flex justify-between gap-2.5 h-[150px] overflow-x-auto  hidescroll bg-gray-500/30 rounded-2xl">
+        <div ref={slider} className="slider flex justify-between gap-2.5 h-[150px] overflow-x-auto  hidescroll bg-black/40 backdrop-blur-lg rounded-2xl">
           {
             forecast.length ? 
             forecast.map((item, index) => (
@@ -167,7 +201,10 @@ function handleRight() {
             : <p className='text-center w-full text-5xl text-red-700'>no data</p>
           }
         </div>
-      </section>
+      </section> </>) : (
+        <FontAwesomeIcon className='text-4xl text-blue-300 absolute left-1/2 top-1/2 translate-[-50%]' icon={faSnowflake} spin />
+      )
+    }
     </main>
   )
 }
