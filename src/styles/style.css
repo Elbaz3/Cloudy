@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+body {
+   height: 100vh;
+   background: url('../assets/2.jpg') no-repeat center center/cover;
+   position: relative;
+   color: white;
+}
+
+body::before {
+   content: "";
+   position: absolute;
+   inset: 0;
+   background: rgba(0, 0, 0, 0.3); /* Dark overlay */
+ }
+ 
+ .box img {
+  filter: invert(1);
+  margin-right: 5px;
+ }
+
+.hidescroll::-webkit-scrollbar {
+   display: none;
+   -ms-overflow-style: none;  /* Hide scrollbar for IE/Edge */
+   scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
