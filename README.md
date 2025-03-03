@@ -16,4 +16,4 @@ A sleek and interactive weather application built with React, Tailwind CSS, and 
 - **API**: WeatherAPI  
 - **Icons**: FontAwesome  
 
-🔗 **[(https://cloudy-mauve.vercel.app/)](#)** | ⭐ Star this repo if you like it! 🚀  
+🔗 **[https://cloudy-mauve.vercel.app/](#)** | ⭐ Star this repo if you like it! 🚀  
