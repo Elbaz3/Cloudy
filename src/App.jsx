@@ -129,7 +129,7 @@ useEffect(() => {
     <main className='z-2 relative p-8 flex flex-col justify-between h-screen   items-center'>
       { !loading ? ( <>
         <form onSubmit={handleSubmit} ref={search} className='absolute border-2 p-2 border-gray-600 translate-y-[-100px]
-        w-1/2 h-10 left-1/4  ease-in-out duration-800 rounded-xl flex shadow-gray-800 shadow-2xl'>
+        z-20 w-1/2 h-10 left-1/4  ease-in-out duration-800 rounded-xl flex shadow-gray-800 shadow-2xl'>
           <FontAwesomeIcon onClick={handleSearchBar} className='absolute top-[-20px] right-1/2 cursor-pointer' icon={faXmark} />
           <input
             value={searchInput}
