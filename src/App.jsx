@@ -3,10 +3,10 @@ import { faLocationDot, faMagnifyingGlass, faXmark, faCircleLeft, faCircleRight 
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios'
 import Card from './components/Card';
-import humiditiImg from'/assets/humidity.png'
-import air from'/assets/air.png'
-import rainy from'/assets/rainy.png'
-import wind from'../src/assets/wind.png'
+import humiditiImg from'./assets/humidity.png'
+import air from'./assets/air.png'
+import rainy from'./assets/rainy.png'
+import wind from'./assets/wind.png'
 
 
 const App = () => {
