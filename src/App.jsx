@@ -7,7 +7,7 @@ import Card from './components/Card';
 
 const App = () => {
   const API_Key = '133f4b3465c547279dd114732250103'
-  const API_URL = 'http://api.weatherapi.com/v1/forecast.json?key=133f4b3465c547279dd114732250103&q=damietta&days=7'
+  const API_URL = 'https://api.weatherapi.com/v1/forecast.json?key=133f4b3465c547279dd114732250103&q=damietta&days=7'
   const [data, setData] = useState({})
   const [error, setError] = useState('')
   const [sky, setSky] = useState('')
@@ -24,7 +24,7 @@ const App = () => {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const {latitude, longitude} = position.coords;
-          const res = await axios.get(`http://api.weatherapi.com/v1/current.json?key=133f4b3465c547279dd114732250103&q=${latitude},${longitude}`)
+          const res = await axios.get(`https://api.weatherapi.com/v1/current.json?key=133f4b3465c547279dd114732250103&q=${latitude},${longitude}`)
           setLocation(res.data.location.name)
         },
         (err) => {
@@ -39,7 +39,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?key=133f4b3465c547279dd114732250103&q=${location}&days=7`)
+        const response = await axios.get(`https://api.weatherapi.com/v1/forecast.json?key=133f4b3465c547279dd114732250103&q=${location}&days=7`)
         setData(response.data)
         console.log(response.data)
         setSky(response.data.current.condition.text)
@@ -119,28 +119,28 @@ function handleRight() {
         </div>
         <div className='info flex flex-col gap-5 p-3 rounded-2xl bg-gray-500/30 text-[13px] text-gray-300'>
           <div className='box flex gap-1'>
-            <img className='text-white' style={{width: '25px', height: '25px'}} src="../src/assets/humidity.png" alt="sss" />
+            <img className='text-white' style={{width: '25px', height: '25px'}} src="/assets/humidity.png" alt="sss" />
             <div className='humidity'>
               <p>humidity</p>
               <h3 className='text-white text-2xl'>{data.current?.humidity || 'unknown'}</h3>
             </div>
           </div>
           <div className='box flex gap-1'>
-            <img style={{width: '25px', height: '25px'}} src="../src/assets/air.png" alt="sss" />
+            <img style={{width: '25px', height: '25px'}} src="/assets/air.png" alt="sss" />
             <div className='humidity'>
               <p>Air Pressure</p>
               <h3 className='text-white text-2xl'>{data.current?.pressure_mb || 'unknown'} mb</h3>
             </div>
           </div>
           <div className='box flex gap-1'>
-            <img style={{width: '25px', height: '25px'}} src="../src/assets/rainy.png" alt="sss" />
+            <img style={{width: '25px', height: '25px'}} src="/assets/rainy.png" alt="sss" />
             <div className='humidity'>
               <p>Chance Of Rain</p>
               <h3 className='text-white text-2xl'>{data.forecast?.forecastday[0]?.day?.daily_chance_of_rain} %</h3>
             </div>
           </div>
           <div className='box flex gap-1'>
-            <img style={{width: '25px', height: '25px'}} src="../src/assets/wind.png" alt="sss" />
+            <img style={{width: '25px', height: '25px'}} src="/assets/wind.png" alt="sss" />
             <div className='humidity'>
               <p>Wind Speed</p>
               <h3 className='text-white text-2xl'>{data.current?.wind_kph || 'unknown'} km/h</h3>
