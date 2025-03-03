@@ -3,6 +3,10 @@ import { faLocationDot, faMagnifyingGlass, faXmark, faCircleLeft, faCircleRight 
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios'
 import Card from './components/Card';
+import humiditiImg from'/assets/humidity.png'
+import air from'/assets/air.png'
+import rainy from'/assets/rainy.png'
+import wind from'../src/assets/wind.png'
 
 
 const App = () => {
@@ -64,7 +68,7 @@ function handleSubmit (e) {
   e.preventDefault()
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?key=${API_Key}&q=${searchInput}&days=7`)
+      const response = await axios.get(`https://api.weatherapi.com/v1/forecast.json?key=${API_Key}&q=${searchInput}&days=7`)
       setData(response.data)
       setSky(response.data.current.condition.text)
       setForecast(response.data.forecast.forecastday)
@@ -119,28 +123,28 @@ function handleRight() {
         </div>
         <div className='info flex flex-col gap-5 p-3 rounded-2xl bg-gray-500/30 text-[13px] text-gray-300'>
           <div className='box flex gap-1'>
-            <img className='text-white' style={{width: '25px', height: '25px'}} src="/assets/humidity.png" alt="sss" />
+            <img className='text-white' style={{width: '25px', height: '25px'}} src={humiditiImg} alt="humidity" />
             <div className='humidity'>
               <p>humidity</p>
               <h3 className='text-white text-2xl'>{data.current?.humidity || 'unknown'}</h3>
             </div>
           </div>
           <div className='box flex gap-1'>
-            <img style={{width: '25px', height: '25px'}} src="/assets/air.png" alt="sss" />
+            <img style={{width: '25px', height: '25px'}} src={air} alt="air" />
             <div className='humidity'>
               <p>Air Pressure</p>
               <h3 className='text-white text-2xl'>{data.current?.pressure_mb || 'unknown'} mb</h3>
             </div>
           </div>
           <div className='box flex gap-1'>
-            <img style={{width: '25px', height: '25px'}} src="/assets/rainy.png" alt="sss" />
+            <img style={{width: '25px', height: '25px'}} src={rainy} alt="rainy" />
             <div className='humidity'>
               <p>Chance Of Rain</p>
               <h3 className='text-white text-2xl'>{data.forecast?.forecastday[0]?.day?.daily_chance_of_rain} %</h3>
             </div>
           </div>
           <div className='box flex gap-1'>
-            <img style={{width: '25px', height: '25px'}} src="/assets/wind.png" alt="sss" />
+            <img style={{width: '25px', height: '25px'}} src={wind} alt="wind" />
             <div className='humidity'>
               <p>Wind Speed</p>
               <h3 className='text-white text-2xl'>{data.current?.wind_kph || 'unknown'} km/h</h3>
