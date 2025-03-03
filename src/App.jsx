@@ -140,7 +140,7 @@ useEffect(() => {
           />
           <button className='absolute right-3 top-1' type='submit'><FontAwesomeIcon className='cursor-pointer' icon={faMagnifyingGlass} /></button>
         </form>
-      <section className="top  flex justify-between max-sm:mt-10 w-full ">
+      <section className="top flex justify-center md:justify-between max-sm:mt-10 w-full flex-wrap gap-5.5 items-center">
         <div className="deg flex flex-col gap-5 p-2 rounded-2xl h-fit bg-black/40 backdrop-blur-lg">
         { loading ? <p>loading ...</p> 
         : 

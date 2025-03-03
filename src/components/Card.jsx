@@ -14,7 +14,7 @@ const Card = ({minTemp, maxTemp, day, img}) => {
    }
 
   return (
-   <div className="item py-4 h-full min-w-[120px] flex flex-col justify-between gap-2 items-center">
+   <div className="item py-4 h-full min-w-[160px] flex flex-col justify-between gap-2 items-center">
       <h2 className='text-yellow-300'>{getDay()}</h2>
       <img className='w-[50px]' src={img} alt="" />
       <div className="temp flex gap-2">
