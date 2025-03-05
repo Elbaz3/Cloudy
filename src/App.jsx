@@ -130,37 +130,26 @@ useEffect(() => {
 
 }, [data.bgImage])
 
-useEffect(() => {
-  let prevTime = null;
+useEffect( ()=> {
 
-  const updateClock = () => {
-    const now = new Date(new Date().toLocaleString('en-US', { timeZone: timezone }));
-    const h = now.getHours() % 12 || 12;
-    const period = now.getHours() >= 12 ? 'PM' : 'AM';
-    const day = now.toLocaleDateString('en-US', { weekday: 'long' });
-
-    const newTime = {
-      hours: `${h}`.padStart(2, "0"),
-      minutes: `${now.getMinutes()}`.padStart(2, "0"),
-      seconds: `${now.getSeconds()}`.padStart(2, "0"),
-      period,
-      day
-    };
-
+  const intervel = setInterval(() => {
     
-    if (JSON.stringify(newTime) !== JSON.stringify(prevTime)) {
-      setTime(newTime);
-      prevTime = newTime;
-    }
+    setTime(() => {
+      const now = new Date(new Date().toLocaleString('en-US', { timeZone: timezone }));
+      const h = now.getHours() % 12 || 12
+      const period = now.getHours() >= 12 ? 'PM' : 'AM'
+      const day = new Date().toLocaleDateString('en-US', { weekday: 'long' })
+      return {
+        hours: `${h}`.padStart(2, "0"),
+        minutes: `${now.getMinutes()}`.padStart(2, "0"),
+        period,
+        day
+      }
+    })
 
-    setTimeout(updateClock, 1000); 
-  };
-
-  updateClock(); 
-
-  return () => clearTimeout(updateClock);
-}, [timezone]);
-
+  }, 60000)
+  return () => clearInterval(intervel)
+}, [timezone])
 
 slider.current ? slider.current.addEventListener('wheel', (e) => {
   e.preventDefault()
@@ -208,7 +197,6 @@ slider.current ? slider.current.addEventListener('wheel', (e) => {
               <span className='text-sm'>{time.period}</span>
               <p>{time?.hours }</p>
               <p>{(time?.minutes)}</p>
-              <p>{time?.seconds}</p>
             </div>
           </div> 
           }
