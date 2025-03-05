@@ -181,7 +181,7 @@ slider.current ? slider.current.addEventListener('wheel', (e) => {
             <div className='flex flex-col '>
               <img className='w-[50px]' src={data.icon} alt="icon" />
               <h3 className='cloud text-2xl'>{data.sky}</h3>
-              <p className="city text-sm">{data.data.location?.name + ' - ' + data.location?.country || 'Unknown'}</p>
+              <p className="city text-sm">{data.data.location?.name + ' - ' + data.data.location?.country || 'Unknown'}</p>
             </div>
             <h1 className='text-3xl font-bold'>{data.data.current?.temp_c} °C</h1>
             <p onClick={handleSearchBar} className='text-sm text-gray-400 cursor-pointer '><FontAwesomeIcon className='mr-1' icon={faLocationDot}/>Change Location</p>
