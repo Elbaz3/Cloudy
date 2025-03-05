@@ -8,7 +8,9 @@ A sleek and interactive weather application built with React, Tailwind CSS, and 
 - 🔍 **Search Functionality** – Find weather details for any city worldwide.  
 - 🌤️ **Dynamic Backgrounds** – Weather conditions update the app’s background for an immersive experience.  
 - 📖 **Detailed Forecast** – View temperature, humidity, air pressure, wind speed, and rain chances.  
-- 🏎️ **Smooth UI & Animations** – Responsive design with an intuitive user experience.  
+- 🏎️ **Smooth UI & Animations** – Responsive design with an intuitive user experience.
+- 🌎 **Time & Date by Timezone** – Displays accurate time and day based on the selected location.
+- 🔄 **Auto Update** – Weather updates automatically without refreshing the page.
 
 ## 🛠️ Tech Stack  
 
