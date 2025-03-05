@@ -24,7 +24,7 @@ const App = () => {
   const [ searchInput, setSearchInput ] = useState('')
   const [ loading, setLoading ] = useState(true)
   const [ time, setTime ] = useState({})
-  const [ timezone, setTimezone] = useState('')
+  const [ timezone, setTimezone] = useState('Africa/Cairo')
   const [ current, setCurrent] = useState(0)
   const search = useRef(null)
   const slider = useRef(null)
@@ -131,9 +131,7 @@ useEffect(() => {
 }, [data.bgImage])
 
 useEffect( ()=> {
-
-  const intervel = setInterval(() => {
-    
+  function updateTime () {
     setTime(() => {
       const now = new Date(new Date().toLocaleString('en-US', { timeZone: timezone }));
       const h = now.getHours() % 12 || 12
@@ -146,8 +144,10 @@ useEffect( ()=> {
         day
       }
     })
-
-  }, 60000)
+  }
+  
+  updateTime ()
+  const intervel = setInterval(updateTime , 60000)
   return () => clearInterval(intervel)
 }, [timezone])
 
