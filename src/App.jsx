@@ -99,7 +99,7 @@ function handleSubmit (e) {
       setTimezone(response.data.location.tz_id)
 
     } catch (err) {
-      setError(err.messege)
+      setError(err.message)
     }
   }
   
