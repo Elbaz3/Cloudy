@@ -18,7 +18,7 @@ import clear from './assets/clear.jpg'
 const App = () => {
   const API_Key = '133f4b3465c547279dd114732250103'
   const API_URL = 'https://api.weatherapi.com/v1/forecast.json?key=133f4b3465c547279dd114732250103&q=damietta&days=7'
-  const [ data, setData ] = useState({bgImage: ''})
+  const [ data, setData ] = useState({bgImage: 'sunny'})
   const [ error, setError ] = useState('')
   const [ location, setLocation ] = useState('egypt')
   const [ searchInput, setSearchInput ] = useState('')
@@ -125,8 +125,8 @@ useEffect(() => {
     "clear": clear
   };
 
-  const current = data.bgImage.toLowerCase().trim() || 'sunny'
-  document.body.style.backgroundImage = `url(${backgroundMap[current]})`
+  const current = data.bgImage.toLowerCase().trim()
+  document.body.style.backgroundImage = `url(${backgroundMap[current] || sunny})`
 
 }, [data.bgImage])
 
