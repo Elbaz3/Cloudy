@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Card = ({minTemp, maxTemp, day, img}) => {
+const Card = (({minTemp, maxTemp, day, img}) => {
    console.log()
    function getDay() {
       const today = new Date().toISOString().split('T')[0]
@@ -23,6 +23,6 @@ const Card = ({minTemp, maxTemp, day, img}) => {
       </div>
    </div>
   )
-}
+})
 
 export default Card
